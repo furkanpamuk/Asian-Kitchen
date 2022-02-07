@@ -82,5 +82,16 @@ const menu = [
   },
 ];
 
-let menuItems = document.createElement('div')
-let menuIndex = document.querySelector('') 
+let btnContainer = document.querySelector('.btn-container')
+let btnNames = ["All", "Korea", "Japan", "China"]
+
+
+for (let index = 0; index < btnNames.length; index++) {
+  let btnItems = document.createElement('button')
+  btnItems.innerHTML = btnNames[index]
+  btnItems.classList.add('btn','btn-outline-dark','btn-item')
+  btnContainer.append(btnItems)
+} 
+ 
+
+
