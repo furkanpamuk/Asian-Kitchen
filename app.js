@@ -91,7 +91,46 @@ for (let index = 0; index < btnNames.length; index++) {
   btnItems.innerHTML = btnNames[index]
   btnItems.classList.add('btn','btn-outline-dark','btn-item')
   btnContainer.append(btnItems)
-} 
+}
+
+
+
+let group= 'category'
+let categoryGroup = menu.reduce( (acc, property) => {
+  let categoryNames = property[group]
+  if ( !acc[categoryNames] ) {
+    acc[categoryNames] = []
+  }
+  acc[categoryNames].push(property)
+  return acc
+}, {})
  
 
+/* console.log(categoryGroup.China[0].title) */
+
+
+
+
+let categoryBtn = document.querySelectorAll('.btn-container > button')
+
+categoryBtn.forEach( (item ,index, array) => 
+array[index].addEventListener('click',menuFilter)
+)
+
+console.log(categoryBtn[0].innerHTML)
+
+function menuFilter( event ){
+  
+  if (this.innerHTML == 'All') {
+    console.log("All tıklandı")
+  }
+  else if(this.innerHTML == 'Korea'){
+    console.log('Korea tıklandı')
+  }
+  else if(this.innerHTML == 'Japan'){
+    console.log('Japan tıklandı')
+  }
+  else
+    {console.log('China tıklandı')}
+}
 
