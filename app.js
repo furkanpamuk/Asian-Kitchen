@@ -138,29 +138,15 @@ function menuCreator(category) {
 let categoryBtn = document.querySelectorAll('.btn-container > button')
 
 categoryBtn.forEach((item, index, array) =>
-  array[index].addEventListener('click', menuFilter)
+  array[index].addEventListener('click',function menuFilter(section){
+    
+    console.log(this.innerHTML)
+    menuCreator(this.innerHTML)
+  
+  }
+  )
 )
-
 console.log(categoryBtn[0].innerHTML)
 
-function menuFilter(event) {
-
-  if (this.innerHTML == 'All') {
-    console.log("All tıklandı")
-  }
-  else if (this.innerHTML == 'Korea') {
-    console.log('Korea tıklandı')
-    menuCreator('Korea')
-  }
-  else if (this.innerHTML == 'Japan') {
-    console.log('Japan tıklandı')
-    menuCreator('Japan')
-  }
-  else {
-    console.log('China tıklandı')
-    menuCreator('China')
-  }
-
-}
 
 
