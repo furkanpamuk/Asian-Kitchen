@@ -89,48 +89,78 @@ let btnNames = ["All", "Korea", "Japan", "China"]
 for (let index = 0; index < btnNames.length; index++) {
   let btnItems = document.createElement('button')
   btnItems.innerHTML = btnNames[index]
-  btnItems.classList.add('btn','btn-outline-dark','btn-item')
+  btnItems.classList.add('btn', 'btn-outline-dark', 'btn-item')
   btnContainer.append(btnItems)
 }
 
-
-
-let group= 'category'
-let categoryGroup = menu.reduce( (acc, property) => {
+let group = 'category'
+let categoryGroup = menu.reduce((acc, property) => {
   let categoryNames = property[group]
-  if ( !acc[categoryNames] ) {
+  if (!acc[categoryNames]) {
     acc[categoryNames] = []
   }
   acc[categoryNames].push(property)
   return acc
 }, {})
- 
 
-/* console.log(categoryGroup.China[0].title) */
+console.log(categoryGroup)
+console.log(categoryGroup.China[0].title)
+console.log(categoryGroup.China.length)
 
+let menuContainer = document.querySelector('.section-center')
 
+function menuCreator(category) {
+  
+  menuContainer.innerHTML = ''
+  
+  for (let index = 0; index < categoryGroup[category].length; index++) {
+    let menuItems = document.createElement('div')
+    menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
+    menuItems.innerHTML = `
+    <img src="${categoryGroup[category][index].img} " 
+    alt="${categoryGroup[category][index].title}" class="photo">
+    <div class="menu-info">
+      <div class="menu-title">
+        <h4>${categoryGroup[category][index].title}</h4>
+        <h4 class="price">${categoryGroup[category][index].price}</h4>
+      </div>
+      <div class="menu-text">
+        ${categoryGroup[category][index].desc}
+      </div>
+    </div>
+    `
+    menuContainer.append(menuItems)
+  }
+
+}
 
 
 let categoryBtn = document.querySelectorAll('.btn-container > button')
 
-categoryBtn.forEach( (item ,index, array) => 
-array[index].addEventListener('click',menuFilter)
+categoryBtn.forEach((item, index, array) =>
+  array[index].addEventListener('click', menuFilter)
 )
 
 console.log(categoryBtn[0].innerHTML)
 
-function menuFilter( event ){
-  
+function menuFilter(event) {
+
   if (this.innerHTML == 'All') {
     console.log("All tıklandı")
   }
-  else if(this.innerHTML == 'Korea'){
+  else if (this.innerHTML == 'Korea') {
     console.log('Korea tıklandı')
+    menuCreator('Korea')
   }
-  else if(this.innerHTML == 'Japan'){
+  else if (this.innerHTML == 'Japan') {
     console.log('Japan tıklandı')
+    menuCreator('Japan')
   }
-  else
-    {console.log('China tıklandı')}
+  else {
+    console.log('China tıklandı')
+    menuCreator('China')
+  }
+
 }
+
 
