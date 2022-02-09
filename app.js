@@ -86,6 +86,7 @@ let btnContainer = document.querySelector('.btn-container')
 let btnNames = ["All", "Korea", "Japan", "China"]
 
 
+
 for (let index = 0; index < btnNames.length; index++) {
   let btnItems = document.createElement('button')
   btnItems.innerHTML = btnNames[index]
@@ -103,20 +104,18 @@ let categoryGroup = menu.reduce((acc, property) => {
   return acc
 }, {})
 
-console.log(categoryGroup)
-console.log(categoryGroup.China[0].title)
-console.log(categoryGroup.China.length)
-
 let menuContainer = document.querySelector('.section-center')
 
 function menuCreator(category) {
-  
-  menuContainer.innerHTML = ''
-  
-  for (let index = 0; index < categoryGroup[category].length; index++) {
-    let menuItems = document.createElement('div')
-    menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
-    menuItems.innerHTML = `
+
+  if (category != 'All') {
+    menuContainer.innerHTML = ''
+
+    for (let index = 0; index < categoryGroup[category].length; index++) {
+
+      let menuItems = document.createElement('div')
+      menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
+      menuItems.innerHTML = `
     <img src="${categoryGroup[category][index].img} " 
     alt="${categoryGroup[category][index].title}" class="photo">
     <div class="menu-info">
@@ -129,24 +128,41 @@ function menuCreator(category) {
       </div>
     </div>
     `
+      menuContainer.append(menuItems)
+    }
+  }
+  else {
+    menuContainer.innerHTML = ''
+    for (let index = 0; index < menu.length; index++) {
+      let menuItems = document.createElement('div')
+      menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
+      menuItems.innerHTML = `
+    <img src="${menu[index].img} " 
+    alt="${menu[index].title}" class="photo">
+    <div class="menu-info">
+      <div class="menu-title">
+        <h4>${menu[index].title}</h4>
+        <h4 class="price">${menu[index].price}</h4>
+      </div>
+      <div class="menu-text">
+        ${menu[index].desc}
+      </div>
+    </div>
+    `
     menuContainer.append(menuItems)
+    }
   }
 
 }
 
-
 let categoryBtn = document.querySelectorAll('.btn-container > button')
 
-categoryBtn.forEach((item, index, array) =>
-  array[index].addEventListener('click',function menuFilter(section){
-    
-    console.log(this.innerHTML)
+categoryBtn.forEach((item) =>
+  item.addEventListener('click', function menuFilter(section) {
     menuCreator(this.innerHTML)
-  
   }
   )
 )
-console.log(categoryBtn[0].innerHTML)
-
+menuCreator('All')
 
 
