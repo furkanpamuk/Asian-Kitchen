@@ -109,45 +109,36 @@ function menuCreator(category) {
     menuContainer.innerHTML = ''
 
     categoryGroup[category].forEach(item => {
-      let menuItems = document.createElement('div')
-      menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
-      menuItems.innerHTML = `
-    <img src="${item.img} " 
-    alt="${item.title}" class="photo">
-    <div class="menu-info">
-      <div class="menu-title">
-        <h4>${item.title}</h4>
-        <h4 class="price">${item.price} $</h4>
-      </div>
-      <div class="menu-text">
-        ${item.desc}
-      </div>
-    </div>
-    `
-      menuContainer.append(menuItems)
+      creator(item)
     })
   }
   else {
-    menu.forEach( item => {
-      let menuItems = document.createElement('div')
-      menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
-      menuItems.innerHTML = `
-    <img src="${item.img} " 
-    alt="${item.title}" class="photo">
-    <div class="menu-info">
-      <div class="menu-title">
-        <h4>${item.title}</h4>
-        <h4 class="price">${item.price} $</h4>
-      </div>
-      <div class="menu-text">
-        ${item.desc}
-      </div>
-    </div>
-    `
-      menuContainer.append(menuItems)
+    menuContainer.innerHTML = ''
+    menu.forEach(item => {
+      creator(item)
     })
   }
 }
+
+function creator(item) {
+  let menuItems = document.createElement('div')
+  menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
+  menuItems.innerHTML = `
+<img src="${item.img} " 
+alt="${item.title}" class="photo">
+<div class="menu-info">
+  <div class="menu-title">
+    <h4>${item.title}</h4>
+    <h4 class="price">${item.price} $</h4>
+  </div>
+  <div class="menu-text">
+    ${item.desc}
+  </div>
+</div>
+`
+  menuContainer.append(menuItems)
+}
+
 
 let categoryBtn = document.querySelectorAll('.btn-container > button')
 
