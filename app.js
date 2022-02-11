@@ -85,14 +85,12 @@ const menu = [
 let btnContainer = document.querySelector('.btn-container')
 let btnNames = ["All", "Korea", "Japan", "China"]
 
-
-
-for (let index = 0; index < btnNames.length; index++) {
+btnNames.forEach(item => {
   let btnItems = document.createElement('button')
-  btnItems.innerHTML = btnNames[index]
+  btnItems.innerHTML = item
   btnItems.classList.add('btn', 'btn-outline-dark', 'btn-item')
   btnContainer.append(btnItems)
-}
+})
 
 let group = 'category'
 let categoryGroup = menu.reduce((acc, property) => {
@@ -107,52 +105,48 @@ let categoryGroup = menu.reduce((acc, property) => {
 let menuContainer = document.querySelector('.section-center')
 
 function menuCreator(category) {
-
   if (category != 'All') {
     menuContainer.innerHTML = ''
 
-    for (let index = 0; index < categoryGroup[category].length; index++) {
-
+    categoryGroup[category].forEach(item => {
       let menuItems = document.createElement('div')
       menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
       menuItems.innerHTML = `
-    <img src="${categoryGroup[category][index].img} " 
-    alt="${categoryGroup[category][index].title}" class="photo">
+    <img src="${item.img} " 
+    alt="${item.title}" class="photo">
     <div class="menu-info">
       <div class="menu-title">
-        <h4>${categoryGroup[category][index].title}</h4>
-        <h4 class="price">${categoryGroup[category][index].price}</h4>
+        <h4>${item.title}</h4>
+        <h4 class="price">${item.price} $</h4>
       </div>
       <div class="menu-text">
-        ${categoryGroup[category][index].desc}
+        ${item.desc}
       </div>
     </div>
     `
       menuContainer.append(menuItems)
-    }
+    })
   }
   else {
-    menuContainer.innerHTML = ''
-    for (let index = 0; index < menu.length; index++) {
+    menu.forEach( item => {
       let menuItems = document.createElement('div')
       menuItems.classList.add('menu-items', 'col-lg-6', 'col-sm-12')
       menuItems.innerHTML = `
-    <img src="${menu[index].img} " 
-    alt="${menu[index].title}" class="photo">
+    <img src="${item.img} " 
+    alt="${item.title}" class="photo">
     <div class="menu-info">
       <div class="menu-title">
-        <h4>${menu[index].title}</h4>
-        <h4 class="price">${menu[index].price}</h4>
+        <h4>${item.title}</h4>
+        <h4 class="price">${item.price} $</h4>
       </div>
       <div class="menu-text">
-        ${menu[index].desc}
+        ${item.desc}
       </div>
     </div>
     `
-    menuContainer.append(menuItems)
-    }
+      menuContainer.append(menuItems)
+    })
   }
-
 }
 
 let categoryBtn = document.querySelectorAll('.btn-container > button')
@@ -163,6 +157,7 @@ categoryBtn.forEach((item) =>
   }
   )
 )
+
 menuCreator('All')
 
 
